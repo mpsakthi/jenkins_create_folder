@@ -10,6 +10,8 @@ TIMEOUT_HTTP = 10  # http call timeout in secs
 
 FARM_LIST = {'local': 'http://localhost:8080/', 'jaws': 'https://jaws-jenkins.pearsondev.com/' }
 
+${local}/Test
+
 PERMISSION_LIST = {
     "build": 'hudson.model.Item.Build',
     "create": 'hudson.model.Item.Create',
@@ -24,6 +26,7 @@ def parse_arguments(arguments):
     parser.add_argument('--folder', help="Folder name to create", type=str, required=True)
     parser.add_argument('--user', help="User on farm to grant access", type=str, required=True)
     parser.add_argument('--permission', help="Permission(s) for user csv.", type=str, required=True)
+    parser.add_argument('--folder_path', help="Folder Path.", type=str, required=False)
     args = parser.parse_args(arguments)
     return args
 
@@ -79,12 +82,12 @@ def jenkins_call_get_config_file(url, auth_value, file_name):
         print("Failed to delete temp folder.")
 
 
-def jenkins_call_create_folder(url, folder_name, template_file, auth_value, permission_to_add):
+def jenkins_call_create_folder(url, folder_name, template_file, auth_value, permission_to_add,folder_path='/'):
     print("creating folder...")
     xml_payload = build_payload_xml(permission_to_add, template_file)
 
     resp = requests.post(
-        "{}/createItem".format(url),
+        "{}/{}/createItem".format(url,folder_path),
         params={"name": folder_name},
         data=xml_payload,
         headers={'Content-Type': 'application/xml'},
@@ -128,7 +131,7 @@ if __name__ == '__main__':
         jenkins_url = FARM_LIST.get(args.farm)
         auth = HTTPBasicAuth(os.environ.get('JENKINS_API_USER'), os.environ.get('JENKINS_API_TOKEN'))
         jenkins_call_get_config_file(jenkins_url, auth, tmp_file_name)
-        jenkins_call_create_folder(jenkins_url, args.folder, tmp_file_name, auth, jenkins_perms)
+        jenkins_call_create_folder(jenkins_url, args.folder, tmp_file_name, auth, jenkins_perms, args.folder_path)
         os.remove(tmp_file_name)
     except:
         try:
