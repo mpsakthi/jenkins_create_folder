@@ -54,7 +54,7 @@ pipeline {
 
 def run_shell_script() {
     shTxt = """
-    #!/usr/bin/env bash
+    export PATH='/usr/local/bin:$PATH'
     python3 -m pip install --upgrade pipenv
     pipenv install
     pipenv run python createFolder.py \
