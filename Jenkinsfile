@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
 
 def FARM_LIST_CREDS = [
-    'local' : 'e4bdd290-949c-43fd-ac6e-a992eff97b78',
-    'abc' : 'abc1',
+    'local' : '5cefbe36-8c9f-45e5-81c4-f04d890aa200',
+    'jaws' : 'abc1',
     ]
 pipeline {
   parameters {

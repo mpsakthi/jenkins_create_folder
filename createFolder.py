@@ -8,11 +8,13 @@ import xml.etree.ElementTree as ET
 
 TIMEOUT_HTTP = 10  # http call timeout in secs
 
-FARM_LIST = {'local': 'http://localhost:8080/'}
+FARM_LIST = {'local': 'http://localhost:8080/', 'jaws': 'https://jaws-jenkins.pearsondev.com/' }
 
 PERMISSION_LIST = {
     "build": 'hudson.model.Item.Build',
-    "create": 'hudson.model.Item.Create'
+    "create": 'hudson.model.Item.Create',
+    "creds_create":'com.cloudbees.plugins.credentials.CredentialsProvider.Create'
+
 }
 
 
