@@ -10,8 +10,6 @@ TIMEOUT_HTTP = 10  # http call timeout in secs
 
 FARM_LIST = {'local': 'http://localhost:8080/', 'jaws': 'https://jaws-jenkins.pearsondev.com/' }
 
-${local}/Test
-
 PERMISSION_LIST = {
     "build": 'hudson.model.Item.Build',
     "create": 'hudson.model.Item.Create',
