@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 TIMEOUT_HTTP = 10  # http call timeout in secs
 
-FARM_LIST = {'local': 'http://localhost:8080/', 'jaws': 'https://jaws-jenkins.pearsondev.com/' }
+FARM_LIST = {'local': 'http://localhost:8080/', 'abc': 'https://abc.com/' }
 
 PERMISSION_LIST = {
     "build": 'hudson.model.Item.Build',
